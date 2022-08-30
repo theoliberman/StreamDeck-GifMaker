@@ -1,0 +1,21 @@
+:root {
+    ----opacity--disabled: 0.5;
+}
+
+.container > * {
+    margin-top: var(--spacing) !important;
+}
+
+.streamDeck {
+    justify-content: center;
+    display: grid;
+    grid: 80px 80px 80px / 80px 80px 80px 80px 80px;
+}
+
+.XL {
+    grid: 80px 80px 80px 80px / 80px 80px 80px 80px 80px 80px 80px 80px;
+}
+
+.Mini {
+    grid: 80px 80px / 80px 80px 80px;
+}

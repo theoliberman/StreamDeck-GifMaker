@@ -11,6 +11,8 @@ const state = reactive({
     small_gif: "",
     gifs: [],
     croping: false,
+    selected: null,
+    model: "",
 })
 
 function isAbsoluteUrl(url) {
@@ -45,6 +47,12 @@ function downloadBlob(blob, name) {
     document.body.removeChild(link);
 }
 
+const options = [
+    { id: 1, label: 'StreamDeck (5x3)' },
+    { id: 2, label: 'StreamDeck XL (8x4)' },
+    { id: 3, label: 'StreamDeck Mini (3x2)' },
+]
+
 async function getRandomGif(e) {
     e.preventDefault()
     state.gif = ""
@@ -70,7 +78,9 @@ function getGifFromFile(e) {
 
 async function cropGif() {
     state.croping = true
-    const res = await $fetch("/api/crop", { method: "POST", body: { gif: state.gif } })
+    state.gifs = []
+    const res = await $fetch("/api/crop", { method: "POST", body: { gif: state.gif, model: state.selected.id } })
+    state.model = state.selected.id
     state.gifs = res.gifs
     state.small_gif = res.small_gif
     state.croping = false
@@ -89,11 +99,9 @@ async function downloadGifs() {
 <template>
     <i-container>
         <i-row center>
-            <i-column xs="8">
-                <div class="_margin-top:1">
-                    <img :src="state.gif || '/placeholder.gif'" class="image -thumbnail" />
-                </div>
-                <i-tabs v-model="state.tab" class="_border _border-radius _margin-top:1" stretch>
+            <i-column xs="8" class="container">
+                <img :src="state.gif || '/placeholder.gif'" class="image -thumbnail" crossorigin="anonymous" />
+                <i-tabs v-model="state.tab" class="_border _border-radius _border-color:dark" stretch>
                     <template #header>
                         <i-tab-title for="tab-1">
                             Random GIF
@@ -124,27 +132,18 @@ async function downloadGifs() {
                         </form>
                     </i-tab>
                 </i-tabs>
-                <div class="_margin-top:1">
-                    <button @click="cropGif" :disabled="!state.gif || state.croping">Crop GIF</button>
-                </div>
-                <div v-if="state.croping" class="_margin-top:1">
-                    <i-loader color="primary" />
-                </div>
-                <div class="streamDeck _margin-top:1" v-if="!state.croping">
+                <i-select v-model="state.selected" :options="options" placeholder="Select your StreamDeck model">
+                    <template #append>
+                        <i-button @click="cropGif" :disabled="!state.gif || !state.selected" color="light"
+                            :loading="state.croping">
+                            Crop GIF</i-button>
+                    </template>
+                </i-select>
+                <div class="streamDeck" v-bind:class="{ 'XL': state.model === 2, 'Mini': state.model === 3 }">
                     <img v-for="gif in state.gifs" :src="`data:image/png;base64,${gif}`" />
                 </div>
-                <div class="_margin-top:1 _margin-bottom:1" v-if="!state.croping && state.gifs.length > 0">
-                    <button @click="downloadGifs">Download</button>
-                </div>
+                <button @click="downloadGifs" v-if="!state.croping && state.gifs.length > 0">Download</button>
             </i-column>
         </i-row>
     </i-container>
 </template>
-
-<style scoped>
-.streamDeck {
-    display: grid;
-    grid: 80px 80px 80px / 80px 80px 80px 80px 80px;
-    justify-content: center;
-}
-</style>
