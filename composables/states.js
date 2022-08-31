@@ -1,0 +1,5 @@
+export const useGif = () => useState("gif", () => "")
+export const useGifs = () => useState("gifs", () => [])
+export const useSmallGif = () => useState("smallGif", () => "")
+export const useSelected = () => useState("selected")
+export const useModel = () => useState("model", () => 1)

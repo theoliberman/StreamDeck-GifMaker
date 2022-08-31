@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     giphyApiKey: process.env.GIPHY_API_KEY
   },
-  css: ['@/assets/css/main.css'],
   modules: ["@inkline/nuxt"],
   inkline: { colorMode: "dark" }
 })

@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       gifs.push(gif.toString('base64'))
     }
   }
-  const small_gif = await sharp(Buffer.from(buffer), { animated: true })
+  const smallGif = await sharp(Buffer.from(buffer), { animated: true })
     .resize({ width: 72, height: 72, fit: "fill" }).toBuffer()
-  return { gifs: gifs, small_gif: small_gif.toString("base64") }
+  return { gifs: gifs, smallGif: smallGif.toString("base64") }
 })
