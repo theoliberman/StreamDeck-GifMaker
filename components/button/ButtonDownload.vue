@@ -20,5 +20,7 @@ async function download() {
 </script>
     
 <template>
-    <i-button @click="download" v-if="gifs.length > 0">Download</i-button>
+    <div>
+        <va-button @click="download" v-if="gifs.length">Download</va-button>
+    </div>
 </template>

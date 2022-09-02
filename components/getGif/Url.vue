@@ -3,6 +3,7 @@ function getGifFromUrl(e) {
     e.preventDefault()
     gif.value = ""
     gif.value = url.value
+    files.value = []
 }
 
 function isAbsoluteUrl(url) {
@@ -10,15 +11,16 @@ function isAbsoluteUrl(url) {
 }
 
 const gif = useGif()
+const files = useFiles()
 const url = useState("url", () => "")
 </script>
 
 <template>
     <form @submit="getGifFromUrl">
-        <i-input v-model="url" color="light" placeholder="URL">
+        <va-input v-model="url" color="light" placeholder="URL">
             <template #append>
-                <i-button type="submit" :disabled="!isAbsoluteUrl(url)" color="light">From URL</i-button>
+                <va-button type="submit" :disabled="!isAbsoluteUrl(url)" color="light">From URL</va-button>
             </template>
-        </i-input>
+        </va-input>
     </form>
 </template>

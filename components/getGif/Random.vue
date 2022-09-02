@@ -4,18 +4,20 @@ async function getRandomGif(e) {
     gif.value = ""
     const res = await $fetch(`/api/random?tag=${tags.value.trim().replace(/\s+/i, "+")}`)
     gif.value = res.gif
+    files.value = []
 }
 
 const gif = useGif()
+const files = useFiles()
 const tags = useState("tags", () => "")
 </script>
 
 <template>
     <form @submit="getRandomGif">
-        <i-input v-model="tags" color="light" placeholder="Tags">
+        <va-input v-model="tags" placeholder="Tags">
             <template #append>
-                <i-button type="submit" color="light">Get Random GIF</i-button>
+                <va-button type="submit">Random GIF</va-button>
             </template>
-        </i-input>
+        </va-input>
     </form>
 </template>

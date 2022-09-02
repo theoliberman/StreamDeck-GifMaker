@@ -2,10 +2,10 @@
 defineProps({
     title: String
 })
+
+const active = useActive()
 </script>
 
 <template>
-    <i-tab :name="title">
-        <slot />
-    </i-tab>
+    <slot v-if="title === active" />
 </template>

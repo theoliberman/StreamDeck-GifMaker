@@ -1,15 +1,16 @@
 <script setup>
 const tabs = useSlots().default().filter(child => child.type.__name === "Tab")
-const active = useState("active", () => tabs[0].props.title)
+const active = useActive()
+active.value = tabs[0].props.title
 </script>
 
 <template>
-    <i-tabs v-model="active" class="_border _border-radius _border-color:dark" stretch>
-        <template #header>
-            <i-tab-title v-for="(tab, index) in tabs" :for="tab.props.title">
-                {{  tab.props.title  }}
-            </i-tab-title>
+    <va-tabs v-model="active" grow center>
+        <template #tabs>
+            <va-tab v-for="tab in tabs" :key="tab.props.title" :name="tab.props.title">
+                {{ tab.props.title }}
+            </va-tab>
         </template>
-        <slot />
-    </i-tabs>
+    </va-tabs>
+    <slot />
 </template>

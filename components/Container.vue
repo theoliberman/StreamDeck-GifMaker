@@ -1,19 +1,22 @@
-<template>
-    <i-container>
-        <i-row center>
-            <i-column xs="8" class="o">
-                <slot></slot>
-            </i-column>
-        </i-row>
-    </i-container>
+ <template>
+    <div class="row justify--center">
+        <div class="flex column md4">
+            <slot></slot>
+        </div>
+    </div>
 </template>
 
 <style>
-.column {
-    margin-bottom: var(--spacing);
+html {
+    background-color: #3B3F40;
+}
+
+.row {
+    margin-bottom: 2rem;
 }
 
 .column>* {
-    margin-top: var(--spacing) !important;
+    margin-top: 2rem;
+    text-align: center;
 }
 </style>

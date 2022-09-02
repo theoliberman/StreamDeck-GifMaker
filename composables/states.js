@@ -1,5 +1,7 @@
 export const useGif = () => useState("gif", () => "")
 export const useGifs = () => useState("gifs", () => [])
 export const useSmallGif = () => useState("smallGif", () => "")
-export const useSelected = () => useState("selected")
+export const useSelected = () => useState("selected", () => 1)
 export const useModel = () => useState("model", () => 1)
+export const useFiles = () => useState("files", () => [])
+export const useActive = () => useState("active", () => 0)

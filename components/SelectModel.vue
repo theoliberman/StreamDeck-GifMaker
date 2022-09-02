@@ -5,13 +5,9 @@ const options = [
     { id: 3, label: 'StreamDeck Mini (3x2)' },
 ]
 const selected = useSelected();
-selected.value = options[0];
 </script>
-
 <template>
-    <i-select v-model="selected" :options="options">
-        <template #append>
-            <slot></slot>
-        </template>
-    </i-select>
+    <div>
+        <va-select v-model="selected" :options="options" text-by="label" value-by="id" track-by="id" />
+    </div>
 </template>

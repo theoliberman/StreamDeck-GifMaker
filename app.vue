@@ -13,15 +13,9 @@
             </Tab>
         </Tabs>
         <SelectModel>
-            <ButtonCrop />
         </SelectModel>
+        <ButtonCrop />
         <Preview />
         <ButtonDownload />
     </Container>
 </template>
-
-<style>
-:root {
-    ----opacity--disabled: 0.5;
-}
-</style>
